@@ -1,9 +1,12 @@
 package com.example.alphabat69.rssfeed;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -75,7 +78,6 @@ public class Activity1 extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this,LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        Toast.makeText(this, "Tap the Title to view Description", Toast.LENGTH_LONG).show();
         try{
             FileInputStream fis = openFileInput("object.txt");
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -99,6 +101,18 @@ public class Activity1 extends AppCompatActivity {
         }
         newsAdapter = new NewsAdapter(newsList);
         recyclerView.setAdapter(newsAdapter);
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(Activity1.this)
+                .setTitle("Hello!")
+                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setMessage("Tap the Title to view Description.\nTo refresh the page just swipe the page down.\nFeeds also works offline");
+        AlertDialog ad = builder.create();
+        ad.show();
     }
 
     public boolean isConnected(){
