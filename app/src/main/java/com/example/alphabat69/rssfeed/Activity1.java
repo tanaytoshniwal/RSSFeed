@@ -20,6 +20,7 @@ import android.widget.Toast;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -40,12 +41,14 @@ public class Activity1 extends AppCompatActivity {
     private ArrayList<String> links;
     private ArrayList<String> descriptions;
     private ArrayList<String> pubs;
+    private String link, filename;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_1);
-
+        link = getIntent().getStringExtra("link");
+        filename = getIntent().getStringExtra("file");
         swiperefresh = findViewById(R.id.swiperefresh);
         swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -79,7 +82,7 @@ public class Activity1 extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         try{
-            FileInputStream fis = openFileInput("object.txt");
+            FileInputStream fis = openFileInput(filename);
             ObjectInputStream ois = new ObjectInputStream(fis);
             Data temp = (Data) ois.readObject();
             titles=temp.get1();
@@ -151,7 +154,7 @@ public class Activity1 extends AppCompatActivity {
         @Override
         protected Integer doInBackground(Integer... params) {
             try{
-                URL url = new URL("http://abcnews.go.com/abcnews/topstories");
+                URL url = new URL(link);
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(false);
                 XmlPullParser xmlPullParser = factory.newPullParser();
@@ -204,7 +207,9 @@ public class Activity1 extends AppCompatActivity {
         protected void onPostExecute(Integer s) {
             super.onPostExecute(s);
             try{
-                FileOutputStream fos = openFileOutput("object.txt", MODE_PRIVATE);
+                File file = new File(filename);
+                file.delete();
+                FileOutputStream fos = openFileOutput(filename, MODE_PRIVATE);
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
                 Data data = new Data(titles, links, descriptions, pubs);
                 oos.writeObject(data);

@@ -6,8 +6,6 @@ package com.example.alphabat69.rssfeed;
 
 public class News {
     private String title, description, link, pub;
-    public News(){
-    }
     public News(String title, String description, String link, String pub){
         this.title = title;
         this.description = description;
