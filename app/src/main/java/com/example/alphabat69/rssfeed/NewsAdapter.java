@@ -59,7 +59,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
         holder.link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(news.getLink()));
+
+                /*Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(news.getLink()));
+                v.getContext().startActivity(*/
+                Intent i = new Intent(v.getContext(), Web.class);
+                i.putExtra("link",news.getLink());
                 v.getContext().startActivity(i);
             }
         });
