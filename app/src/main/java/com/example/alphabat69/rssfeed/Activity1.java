@@ -204,7 +204,7 @@ public class Activity1 extends AppCompatActivity {
         protected void onPostExecute(Integer s) {
             super.onPostExecute(s);
             try{
-                FileOutputStream fos = openFileOutput("object.txt", MODE_APPEND);
+                FileOutputStream fos = openFileOutput("object.txt", MODE_PRIVATE);
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
                 Data data = new Data(titles, links, descriptions, pubs);
                 oos.writeObject(data);
