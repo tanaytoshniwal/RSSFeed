@@ -4,18 +4,28 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 public class Splash extends AppCompatActivity {
-
+    private TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        new Handler().postDelayed(new Runnable() {
+        textView = findViewById(R.id.textView);
+        final Handler h = new Handler();
+        h.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(Splash.this));
+                textView.setVisibility(View.VISIBLE);
+                h.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(Splash.this, Activity1.class));
+                    }
+                }, 2500);
             }
-        }, 3000);
+        }, 1500);
     }
 }

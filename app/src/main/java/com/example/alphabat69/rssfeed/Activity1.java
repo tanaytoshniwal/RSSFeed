@@ -50,12 +50,12 @@ public class Activity1 extends AppCompatActivity {
         swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                newsList.clear();
-                titles.clear();
-                links.clear();
-                descriptions.clear();
-                pubs.clear();
                 if(isConnected()) {
+                    newsList.clear();
+                    titles.clear();
+                    links.clear();
+                    descriptions.clear();
+                    pubs.clear();
                     new ProcessInBackground().execute();
                     newsAdapter = new NewsAdapter(newsList);
                     recyclerView.setAdapter(newsAdapter);
