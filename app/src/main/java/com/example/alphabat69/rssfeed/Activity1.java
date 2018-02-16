@@ -113,7 +113,7 @@ public class Activity1 extends AppCompatActivity {
 
                     }
                 })
-                .setMessage("Tap the Title to view Description.\nTo refresh the page just swipe the page down.\nFeeds also works offline");
+                .setMessage("Tap the Title to view Description.\nTo refresh the page just swipe the page down.\nTap the links to view it in WebView.\nFeeds also works offline");
         AlertDialog ad = builder.create();
         ad.show();
     }
