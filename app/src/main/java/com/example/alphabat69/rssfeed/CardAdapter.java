@@ -54,6 +54,15 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
                 context.startActivity(i);
             }
         });
+        holder.title.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(context, Activity1.class);
+                i.putExtra("link", card.getLink());
+                i.putExtra("file", card.getFile());
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override
