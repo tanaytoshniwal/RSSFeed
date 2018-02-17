@@ -22,9 +22,27 @@ public class Splash extends AppCompatActivity {
                 h.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(Splash.this, Selection.class));
+                        textView.setText(textView.getText().toString().concat("."));
+                        h.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                textView.setText(textView.getText().toString().concat("."));
+                                h.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        textView.setText(textView.getText().toString().concat("."));
+                                        h.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                startActivity(new Intent(Splash.this, Selection.class));
+                                            }
+                                        }, 500);
+                                    }
+                                }, 500);
+                            }
+                        }, 500);
                     }
-                }, 2500);
+                }, 500);
             }
         }, 1500);
     }
